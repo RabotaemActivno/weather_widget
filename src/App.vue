@@ -1,26 +1,39 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="App">
+    <SettingsPage/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import WeatherPage from './pages/WeatherPage'
+import SettingsPage from './pages/SettingsPage'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SettingsPage,
+    // WeatherPage
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+  font-family: sans-serif;
+}
+.App {
+  width: 250px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 15px 8px 8px 8px;
+  position: relative;
 }
 </style>
