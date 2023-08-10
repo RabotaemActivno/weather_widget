@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class='settings' src='../assets/setting.svg' alt="настройки" />
+        <a href="#/settings"><img class='settings' src='../assets/setting.svg' alt="настройки" /></a>
         <InformationComponent />
     </div>
 </template>

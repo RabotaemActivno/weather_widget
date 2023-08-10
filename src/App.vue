@@ -1,18 +1,13 @@
 <template>
   <div class="App">
-    <SettingsPage/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-// import WeatherPage from './pages/WeatherPage'
-import SettingsPage from './pages/SettingsPage'
+
 export default {
   name: 'App',
-  components: {
-    SettingsPage,
-    // WeatherPage
-  }
 }
 </script>
 

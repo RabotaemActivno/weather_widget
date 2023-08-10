@@ -1,14 +1,23 @@
 <template>
     <li class="list_item">
         <img class="li_img" src="../assets/burger.svg" alt="burger">
-        <p>Moscow</p>
-        <img class="li_img" src="../assets/delete.svg" alt="delete">
+        <p>{{ location.name }}</p>
+        <img @click="deleteHandler"  class="li_img" src="../assets/delete.svg" alt="delete">
     </li>
 </template>
 
 <script>
 export default {
-    name: 'ListItem'
+    name: 'ListItem',
+    props: {
+        location: Object
+    },
+    methods: {
+        deleteHandler() {
+            this.$emit('del', this.location.id)
+            console.log(this.location.id);
+        }
+    }
 }
 </script>
 

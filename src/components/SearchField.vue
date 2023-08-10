@@ -6,26 +6,20 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
     name: 'SearchField',
     data () {
         return{
-            inputValue: null
+            inputValue: ''
         }
     },
     methods: {
-        async onClickHandler () {
-            if (this.inputValue) {
-                try {
-                    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.inputValue}&appid=587e51c75b7ee1a646462b17302866a9`)
-                    console.log(response.data);
-                } catch (err) {
-                    console.log(err);
-                }
-            }
-        }
+       onClickHandler() {
+        this.$emit('input', this.inputValue)
+        this.$emit('clickEmmit')
+        this.inputValue = ''
+       }
     }
 }
 </script>
