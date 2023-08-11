@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import {useStore} from 'vuex';
 
 export default {
     name: 'SearchField',
@@ -14,10 +15,18 @@ export default {
             inputValue: ''
         }
     },
+    setup() {
+        const store = useStore();
+
+        return {store};
+    },
     methods: {
        onClickHandler() {
-        this.$emit('input', this.inputValue)
-        this.$emit('clickEmmit')
+        this.store.dispatch('fetchCity', this.inputValue);
+        // this.store.dispatch('addCity', this.inputValue)
+        // this.$emit('input', this.inputValue)
+        // this.$emit('clickEmmit')
+        // console.log(this.store.getters.getChosenCity)
         this.inputValue = ''
        }
     }

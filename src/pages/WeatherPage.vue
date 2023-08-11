@@ -11,7 +11,16 @@ export default {
     name: 'WeatherPage',
     components: {
         InformationComponent
+    },
+    data () {
+        return {
+            informationArr: []
+        }
+    },
+    methods: {
+
     }
+    
 }
 </script>
 

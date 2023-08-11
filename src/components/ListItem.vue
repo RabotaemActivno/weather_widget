@@ -1,21 +1,27 @@
 <template>
     <li class="list_item">
         <img class="li_img" src="../assets/burger.svg" alt="burger">
-        <p>{{ location.name }}</p>
+        <p>{{ location }}</p>
         <img @click="deleteHandler"  class="li_img" src="../assets/delete.svg" alt="delete">
     </li>
 </template>
 
 <script>
+import {useStore} from 'vuex'
+
 export default {
     name: 'ListItem',
     props: {
-        location: Object
+        location: String
+    },
+    setup() {
+        const store = useStore();
+
+        return {store}
     },
     methods: {
         deleteHandler() {
-            this.$emit('del', this.location.id)
-            console.log(this.location.id);
+            this.store.dispatch('removeCity', this.location)
         }
     }
 }
