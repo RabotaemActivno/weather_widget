@@ -5,40 +5,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'App',
-  data() {
-    return {
-      inputValue: 1,
-      locations: [
-        { id: Date.now(), name: 'Moscow' },
-      ]
-    }
-  },
-  methods: {
-    deleteMethod(id) {
-      this.locations = this.locations.filter(item => item.id !== id);
-      console.log(id);
-    },
-    inputValueMethod(value) {
-      this.inputValue = value
-    },
-    async onSearchClick() {
-      console.log('idi nahuy');
-      if (this.inputValue) {
-        try {
-          const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.inputValue}&appid=587e51c75b7ee1a646462b17302866a9`)
-          const newLocations = { id: Date.now(), name: response.data.name }
-          this.locations.push(newLocations)
-          console.log(this.locations);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="input_field">
-        <input v-model="inputValue" type="text" name="" id="">
+        <input @keydown.enter="onClickHandler" v-model="inputValue" type="text" name="" id="">
         <img @click="onClickHandler" src="../assets/enter.svg" alt="enter">
     </div>
 </template>
@@ -23,10 +23,6 @@ export default {
     methods: {
        onClickHandler() {
         this.store.dispatch('fetchCity', this.inputValue);
-        // this.store.dispatch('addCity', this.inputValue)
-        // this.$emit('input', this.inputValue)
-        // this.$emit('clickEmmit')
-        // console.log(this.store.getters.getChosenCity)
         this.inputValue = ''
        }
     }

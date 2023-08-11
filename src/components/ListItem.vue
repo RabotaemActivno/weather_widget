@@ -1,7 +1,7 @@
 <template>
     <li class="list_item">
         <img class="li_img" src="../assets/burger.svg" alt="burger">
-        <p>{{ location }}</p>
+        <p>{{ location.data.name }}</p>
         <img @click="deleteHandler"  class="li_img" src="../assets/delete.svg" alt="delete">
     </li>
 </template>
@@ -12,7 +12,7 @@ import {useStore} from 'vuex'
 export default {
     name: 'ListItem',
     props: {
-        location: String
+        location: Object
     },
     setup() {
         const store = useStore();
@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         deleteHandler() {
-            this.store.dispatch('removeCity', this.location)
+            this.store.dispatch('removeCity', this.location.data.id)
         }
     }
 }

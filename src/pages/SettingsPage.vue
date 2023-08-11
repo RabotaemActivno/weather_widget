@@ -1,12 +1,11 @@
 <template>
     <div>
-        <a href="#/"><img class="closeBtn" src="../assets/close.svg" alt="close"></a>
+        <a href="/"><img class="closeBtn" src="../assets/close.svg" alt="close"></a>
         <h1 class="settings_title">Settings</h1>
         <ul class="list">
-            <ListItem @del="deleteMethod" v-for="city in chosenCity" :key="city" :location="city"/>
+            <ListItem v-for="item in chosenCity" :key="item.data.id" :location="item"/>
         </ul>
-        <SearchField @input="inputValueMethod" @clickEmmit="onSearchClick"/>
-
+        <SearchField />
     </div>
 </template>
 
@@ -28,13 +27,6 @@ export default {
 
         return {chosenCity}
     },
-    data () {
-        return{
-            
-        }
-    },
-    methods: {
-    }
 }
 </script>
 
