@@ -17,6 +17,7 @@ import SearchField from '../components/SearchField'
 import {useStore} from 'vuex'
 
 export default {
+    
     name: 'SettingsPage',
     components: {
         ListItem, SearchField
