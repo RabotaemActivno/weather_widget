@@ -3,6 +3,9 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/weather_widget/'
+    : '/',
   css: {
     loaderOptions: {
       sass: {

@@ -5,7 +5,7 @@
 			<div v-if="hasLocation">
 				<InformationComponent v-for="item in chosenCity" :key="item.data.id" :location="item" />
 			</div>
-			<div v-else>Добавьте город</div>
+			<div v-else>Add city-></div>
 		</div>
     </div>
 </template>
