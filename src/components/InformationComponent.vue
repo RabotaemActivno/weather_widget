@@ -1,31 +1,31 @@
 <template>
     <div>
-        <h1 class="title">{{ weatherDataCity }}, {{ weatherDataCountry }}</h1>
+        <h1 class="title">{{ location.data.name }}, {{ location.data.sys.country }}</h1>
         <div class="temp">
             <div>
                 <img class="image" src='../assets/cloud.svg' alt="cloud" />
             </div>
-            <div>{{ weatherDataTemp }} c</div>
+            <div>{{ (location.data.main.temp - 273.15).toFixed(0) }} c</div>
         </div>
         <div class="description">
-            <p>Feels like {{weatherDataFeelsLike}}C. {{ weatherDataWeather }}. {{ weatherDataWeatherDesc }}</p>
+            <p>Feels like {{(location.data.main.feels_like - 273.15).toFixed(0)}}C. {{ capitalizeFirstLetter(location.data.weather[0].main) }}. {{ capitalizeFirstLetter(location.data.weather[0].description) }}</p>
             <div class="grid">
                 <div class="item1 flex">
                     <img class="grid_img" src='../assets/wind.svg' alt="wind" />
-                    <p>{{weatherDataWindSpeed}}m/s {{weatherDataWindDirection}}</p>
+                    <p>{{location.data.wind.speed}}m/s {{getWindDirection(location.data.wind.deg)}}</p>
                 </div>
                 <div class="item2 flex">
                     <img class="grid_img" src="../assets/barometer.svg" alt="barometer" />
-                    <p>{{weatherDataPressure}}hPa</p>
+                    <p>{{location.data.main.pressure}}hPa</p>
                 </div>
                 <div class="item3">
-                    <p>Humidity: {{weatherDataHumidity}}%</p>
+                    <p>Humidity: {{location.data.main.humidity}}%</p>
                 </div>
                 <div class="item4">
                     <p>Dew point: 0%</p>
                 </div>
                 <div class="item5">
-                    <p>Visibility: {{weatherDataVisibility}}km</p>
+                    <p>Visibility: {{location.data.visibility/1000}}km</p>
                 </div>
             </div>
         </div>
@@ -33,59 +33,20 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
 export default {
     name: 'InformationComponent',
-    data() {
-        return {
-            weatherDataCity: null,
-            weatherDataCountry: null,
-            weatherDataTemp:null,
-            weatherDataFeelsLike: null,
-            weatherDataWeatherDesc: null,
-            weatherDataWeather: null,
-            weatherDataWindSpeed: null,
-            weatherDataWindDirection: null,
-            weatherDataPressure: null,
-            weatherDataHumidity: null,
-            weatherDataVisibility: null,
-        }
-    },
-    mounted() {
-        this.fetchWeatherData()
-    },
+	props: {
+		location: Object
+	},
     methods: {
-        async fetchWeatherData()  {
-            try {
-                const response = await axios
-                    .get(`https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&appid=587e51c75b7ee1a646462b17302866a9`)
-                this.weatherDataCity = response.data.name
-                this.weatherDataCountry = response.data.sys.country
-                this.weatherDataTemp = (response.data.main.temp - 273.15).toFixed(0)
-                this.weatherDataFeelsLike = (response.data.main.feels_like - 273.15).toFixed(0)
-                this.weatherDataWeatherDesc = capitalizeFirstLetter(response.data.weather[0].description)
-                this.weatherDataWeather = capitalizeFirstLetter(response.data.weather[0].main)
-                this.weatherDataWindSpeed = response.data.wind.speed
-                this.weatherDataWindDirection = this.getWindDirection(response.data.wind.deg)
-                this.weatherDataPressure = response.data.main.pressure
-                this.weatherDataHumidity = response.data.main.humidity
-                this.weatherDataVisibility = response.data.visibility/1000
-
-            } catch (error) {
-                console.log(error);
-            }
-        },
+		capitalizeFirstLetter(string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		},
         getWindDirection(deg) {
             const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
             const index = Math.round(deg / 22.5) % 16;
             return directions[index];
-        },
-        
+        }
     }
 }
 </script>

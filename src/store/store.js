@@ -13,7 +13,8 @@ const store = createStore({
             state.chosenCity.push(payload)
         },
         removeCity (state, payload) {
-            state.chosenCity.filter((item) => item !== payload)
+            console.log('state.chosenCity', state.chosenCity)
+            state.chosenCity = state.chosenCity.filter((item) => item.data.id !== payload)
         }
     },
     actions: {
@@ -26,7 +27,7 @@ const store = createStore({
         async fetchCity(store, payload) {
             try {
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${payload}&appid=587e51c75b7ee1a646462b17302866a9`)
-                store.dispatch('addCity', response.name)
+                store.dispatch('addCity', response)
             } catch (err) {
                 console.log(err);
             }
